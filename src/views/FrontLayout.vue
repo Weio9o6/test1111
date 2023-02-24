@@ -23,32 +23,21 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="collapse navbar-collapse justify-content-end"
-        id="navbarNavAltMarkup"
-      >
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <RouterLink class="nav-link" to="/news">最新消息</RouterLink>
-          <RouterLink class="nav-link" to="/reserve">預約須知</RouterLink>
+          <RouterLink class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-.collapsing" to="/news">最新消息</RouterLink>
+          <RouterLink class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" to="/reserve">預約須知</RouterLink>
           <RouterLink class="nav-link" to="/products">美甲款式</RouterLink>
           <RouterLink class="nav-link" to="/question">常見問題</RouterLink>
           <RouterLink class="nav-link" to="/about">聯絡我們</RouterLink>
           <RouterLink class="nav-link" to="/admin">後台</RouterLink>
           <RouterLink class="nav-link" to="/login">登入後台</RouterLink>
-          <RouterLink class="nav-link" to="/favourite"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="19"
-              height="19"
-              fill="currentColor"
-              class="bi bi-heart-fill"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-              /></svg
-          ></RouterLink>
+          <RouterLink class="nav-link" to="/favourite">
+            <svg
+              xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+          </RouterLink>
           <div>
             <RouterLink class="nav-link" to="/cart"
               ><svg

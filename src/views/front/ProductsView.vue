@@ -9,6 +9,18 @@
     <div class="row mt-5">
       <div class="col-md-2">
         <div class="list-group">
+          <!-- <a
+            href="#"
+            class="list-group-item list-group-item-action active"
+            aria-current="true"
+          >
+            所有款式
+          </a>
+          <a class="list-group-item list-group-item-action" @click="getCategory('單色')">單色</a>
+          <a href="#" class="list-group-item list-group-item-action">跳色</a>
+          <a href="#" class="list-group-item list-group-item-action">漸層</a>
+          <a href="#" class="list-group-item list-group-item-action">暈染</a>
+          <a href="#" class="list-group-item list-group-item-action">指定款</a> -->
           <a
             href="#"
             class="list-group-item list-group-item-action active"
@@ -16,11 +28,7 @@
           >
             所有款式
           </a>
-          <a href="#" class="list-group-item list-group-item-action">單色</a>
-          <a href="#" class="list-group-item list-group-item-action">跳色</a>
-          <a href="#" class="list-group-item list-group-item-action">漸層</a>
-          <a href="#" class="list-group-item list-group-item-action">暈染</a>
-          <a href="#" class="list-group-item list-group-item-action">指定款</a>
+          <a class="list-group-item list-group-item-action" @click="getCategory(category)" v-for="category in categorys" :key="category">{{ category }}</a>
         </div>
       </div>
       <div class="col-md-10">
@@ -82,6 +90,9 @@ export default {
       isLoading: false,
       products: [],
       pagination: {},
+      data: [],
+      result: [],
+      categorys: ["單色", "跳色", "漸層", "暈染", "指定款"]
     };
   },
   components: {
@@ -89,17 +100,38 @@ export default {
     PaginationComponent,
   },
   methods: {
-    getProducts(page = 1) {
-      this.$http
-        .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/products?page=${page}`)
+    // getProducts(page = 1) {
+    //   this.$http
+    //     .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/products?page=${page}`)
+    //     .then((res) => {
+    //       console.log(res);
+    //       this.products = res.data.products;
+    //       this.pagination = res.data.pagination;
+    //     })
+    //     .catch((err) => {
+    //       console.error(err);
+    //     });
+    // },
+    getProducts(page = 2) {
+      for(let i=1; i<= page; i++){
+        this.$http
+        .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/products?page=`+i)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           this.products = res.data.products;
           this.pagination = res.data.pagination;
+          this.data = this.data.concat(res.data.products);
+          console.log(this.data);
         })
         .catch((err) => {
           console.error(err);
         });
+      }
+    },
+    getCategory(name){
+      this.result = this.data.filter(res=> res.category === name);
+      console.log(this.result);
+      this.products = this.result
     },
     addToCart(id) {
       const data = {
